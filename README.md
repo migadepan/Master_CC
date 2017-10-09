@@ -1,2 +1,2 @@
 # ObjetivosCC
-Repositorio con los objetivos de la asignatura
+Repositorio con los proyectos de la asignatura Cloud Computing del Master en Ingeniería Informática
