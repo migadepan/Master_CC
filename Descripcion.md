@@ -1,4 +1,4 @@
-# ugr_cloud_computing
+# Proyecto Cloud Computing
 
 ## Descripción del problema
 
