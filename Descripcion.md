@@ -2,11 +2,11 @@
 
 ## Descripción del problema
 
-El TFG desarrollado, necesita obtener datos de una base de datos en el servidor. Para la obtención de esa información se ha realizado una API Rest muy básica en PHP.
+El TFG "Software para el entrenamiento de escaladores en roca y rocódromo", necesita obtener datos almacenados de los sectores de escalada, los tipos, las vías, etc... de una base de datos en el servidor. 
 
 ## Solución propuesta
 
-La solución que se propone es desarrollar un software que permita el acceso a los datos necesarios de una forma más sencilla y segura.
+La solución que se propone consiste en desarrollar un servicio que permita el acceso y gestión de éste repositorio y se pueda mostrar en la aplicación móvil.
 
 ## Introducción descriptiva del proyecto
 
