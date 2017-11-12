@@ -2,10 +2,6 @@ execute "apt-get update" do
   command "apt-get update"
 end
 
-execute "apt-get upgrade" do
-  command "apt-get upgrade"
-end
-
 package "apache2" do 
   action :install
 end
