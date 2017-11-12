@@ -4,7 +4,7 @@ Comenzamos creando el sistema de archivos
 
 ## Conexión sftp
 
-Para mayor comodidad utilizamos una conexión sftp para subir los archivos a la máquina aws.
+Para mayor comodidad utilizamos una conexión sftp para subir los archivos a la máquina aws. Se almacenará la carpeta proyecto dentro de cookbooks y se modificará el archivo node.js para que ejecute las recetas correctas
 
 
 ```
