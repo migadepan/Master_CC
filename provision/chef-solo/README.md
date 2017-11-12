@@ -12,3 +12,8 @@ sftp -o StrictHostKeyChecking=no -i "ClaveMaquinaMiga.pem" ubuntu@ec2-34-209-122
 
 ```
 
+## Ejecución de chef-solo
+
+A continuación el resultado de la ejecución de la receta
+
+![capt1-hito2](https://user-images.githubusercontent.com/6852023/32699483-e379ee88-c7b6-11e7-866e-31e79d355ab4.png)
