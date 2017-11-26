@@ -61,6 +61,11 @@ Para finalizar el hito, se ha probado la receta de TonyESP y ha funcionado corre
 ![capt1-tony](https://user-images.githubusercontent.com/6852023/32702208-acf2edec-c7e3-11e7-9dd0-051505d54a5c.png)
 
 
+## Automatización de creación de maquinas virtuales
+
+Para la automatización se ha utilizado el servicio de virtualización de Azure. Para mas detalles -> Readme
+
+
 ## Licencia
 
 Este proyecto será liberado bajo la licencia [GNU GLP V3]
