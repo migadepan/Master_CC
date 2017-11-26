@@ -63,7 +63,7 @@ Para finalizar el hito, se ha probado la receta de TonyESP y ha funcionado corre
 
 ## Automatización de creación de maquinas virtuales
 
-Para la automatización se ha utilizado el servicio de virtualización de Azure. Para mas detalles -> Readme
+Para la automatización se ha utilizado el servicio de virtualización de Azure. Para mas detalles -> [Readme] (https://github.com/migadepan/Master_CC/tree/master/automatizacion)
 
 
 ## Licencia
