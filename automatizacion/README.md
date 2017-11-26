@@ -54,4 +54,6 @@ Una vez realizado el script se ejecuta
 sh acopio.sh
 ```
 
+Ip de la máquina creada: 52.170.4.62
+
 
