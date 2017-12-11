@@ -1,59 +1,32 @@
-# Provisionamiento en Azure
+# Orquestación del proyecto Software para asistencia de escaladores en roca y rocódromo
 
-## Instalaciones previas
+## Arquitectura utilizada
+Se van a utilizar dos máquinas virtuales, una para la base de datos y otra para los servidores REST. Se utilizará en ambas el sistema operativo Ubuntu LTS 16.4 principalmente por familiaridad con dicho sistema, ya que a nivel técnico hubiera sido posible utilizar otra distribución como CentOS o Debian sin ningún problema.
 
-```
-#Instalación de jq para el despliegue
-sudo apt-get install jq
+## Software a utilizar
+He decidido usar la herramienta Vagrant, porque facilita la creación de entornos virtuales, ahorrando especialmente tiempo con la posibilidad de utilizar los box (imagenes) que más nos convengan y también porque no hay muchas alternativas razonables a esta herramienta.
 
-#Instalación de python
-sudo apt-get install python
-
-#Instalación de azure client
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | \sudo tee /etc/apt/sources.list.d/azure-cli.list
-
-sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893
-sudo apt-get install apt-transport-https
-sudo apt-get update && sudo apt-get install azure-cli
-```
-## Uso de AZURE CLI
-Hacemos login en azure utilizando az login. 
-Nos mostrará la siguiente información To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code CKLTUYR9Y to authenticate.
-Seguimos el enlace e introducimos el codigo para acceder.
-
-## Creación de Script
-El siguiente Script automatiza la cración y el aprovisionamiento de la máquina virtual. 
+## Descarga e instalación de Vagrant
+Realizamos la instalación del plugin con el siguiente comando. Se ha seleccionado la versión 2.0 ya que para utilizar el plugin de azure es necesario una versión superior a la 1.4, la última estable que ofrece.
 
 ```
-#!/bin/bash
-
-# Crear el grupo de recursos
-az group create --name GroupMiga --location eastus
-
-# Crear la maquina virtual con el grupo de recursos anterior.
-ipAddress=$(az vm create -g GroupMiga -n MVMiga --image UbuntuLTS --generate-ssh-keys | jq -r '.publicIpAddress')
-
-echo Se ha creado la siguiente maquina:
-echo -name : MVMiga
-echo -ip : $ipAddress
-echo -------------------------
-
-# Abrir puertos
-az network nsg create --resource-group GroupMiga --location eastus --name remoteAzureMigaNSG
-az network nsg rule create --resource-group GroupMiga --nsg-name RAZMigaNSG --name remoteAzureMigaNSGRule80 --protocol tcp --priority 1000 --destination-port-range 80
-az network nsg rule create --resource-group GroupMiga --nsg-name RAZMigaNSG --name remoteAzureMigaNSGRule20 --protocol tcp --priority 999 --destination-port-range 20
-az network nsg rule create --resource-group GroupMiga --nsg-name RAZMigaNSG --name remoteAzureMigaNSGRule22 --protocol tcp --priority 998 --destination-port-range 22
-
-#provision
-echo A continuación utilizamos la provisión con chef-solo:
-echo https://github.com/migadepan/Master_CC/tree/master/provision/chef-solo
+vagrant plugin install vagrant-azure --plugin-version '2.0.0.pre6'
 ```
-Una vez realizado el script se ejecuta
+Vamos a necesitar hacer login en el cliente de Azure, el cual se instaló en el apartado de automatización, Instalaciones previas [ver enlace](https://github.com/migadepan/Master_CC/tree/master/automatizacion)
+
+Ejecutamos el cliente y nos logeamos, a continuación necesitamos las variables de entorno de la información de nuestra cuenta de azure para escribirlo en el VagrantFile. Obtendemos esos datos con los siguientes comandos
 
 ```
-sh acopio.sh
+az ad sp create-for-rbac
+```
+Del anterior nos interesa el tenant, appId y password. Y con el siguiente obtenemos el SubscriptionId.
+```
+az account list --query "[?isDefault].id" -o tsv 
 ```
 
-Ip de la máquina creada: 52.170.4.62
-
-
+## Ejecución de Vagrant
+Una vez editado nuestro archivo Vagrantfile, podemos pasar a ejecutarlo con los siguientes comandos:
+```
+vagrant box add azure https://github.com/azure/vagrant-azure/raw/v2.0/dummy.box --provider azure
+vagrant up --no-paralell
+```
