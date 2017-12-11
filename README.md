@@ -26,6 +26,17 @@ Se utilizará una arquitectura basada en microservicios.
 - La API REST se realizará en Python
 - Servicio HTTP proporcionado con `Apache` y `PHP`
 
+
+# Orquestación
+
+La orquestación de las máquinas necesarias para el proyecto, se ha realizado utilizando la herramienta Vagrant, al ser compatible con azure. En el siguiente enlace se pueden seguir los pasos para la instalación y orquestación.
+
+Tanto el sistema operativo como el aprovisionamiento es el utilizado en las versiones anteriores. Podemos ver una guia de instalacion en el [siguiente enlace](https://github.com/migadepan/Master_CC/tree/master/orquestacion)
+
+
+Despliegue Vagrant:52.233.141.163
+
+
 # Aprovisionamiento
 
 El aprovisionamiento se ha realizado sobre una máquina virtual de aws con la versión 16.04 de ubuntu utilizando chef-solo por su sencillez. Para comenzar es necesario instalar la aplicación chef-solo utilizando el siguiente comando:
