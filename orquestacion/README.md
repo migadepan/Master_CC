@@ -24,6 +24,10 @@ Del anterior nos interesa el tenant, appId y password. Y con el siguiente obtene
 az account list --query "[?isDefault].id" -o tsv 
 ```
 
+![captura6](https://user-images.githubusercontent.com/6852023/34181461-88bf2674-e512-11e7-8d70-8eb0b8566d12.png)
+
+
+
 ## Ejecución de Vagrant
 Una vez editado nuestro archivo Vagrantfile, podemos pasar a ejecutarlo con los siguientes comandos:
 ```
