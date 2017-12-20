@@ -1,16 +1,20 @@
+miga_key = '~/.ssh/id_rsa'
 Vagrant.configure("2") do |config|
 
-	azure.tenant_id = ENV['AZURE_TENANT_ID']
-	azure.client_id = ENV['AZURE_CLIENT_ID']
-	azure.client_secret = ENV['AZURE_CLIENT_SECRET']
-	azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
+  do_common_azure_stuff = Proc.new do |azure, override|
+      azure.tenant_id = ENV['AZURE_TENANT_ID']
+      azure.client_id = ENV['AZURE_CLIENT_ID']
+      azure.client_secret = ENV['AZURE_CLIENT_SECRET']
+      azure.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
+  end
 
   config.vm.define "maquinaAPImiga" do |serviceObject|
     serviceObject.vm.box = 'azure'
 
-    serviceObject.ssh.private_key_path = '~/.ssh/id_rsa'
+    serviceObject.ssh.private_key_path = miga_key
 
     serviceObject.vm.provider :azure do |azure, override|
+    	 do_common_azure_stuff.call azure, override
 
       azure.location="westeurope"
 
@@ -28,6 +32,7 @@ Vagrant.configure("2") do |config|
     serviceImage.ssh.private_key_path = '~/.ssh/id_rsa'
 
     serviceImage.vm.provider :azure do |azure, override|
+    	 do_common_azure_stuff.call azure, override
 
       azure.location="westeurope"
 
@@ -42,12 +47,5 @@ Vagrant.configure("2") do |config|
   #Provisión
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "provision"
-  #   chef.roles_path = "../my-recipes/roles"
-  #   chef.data_bags_path = "../my-recipes/data_bags"
-  #   chef.add_recipe "mysql"
-  #   chef.add_role "web"
-  #
-  #   # You may also specify custom JSON attributes:
-  #   chef.json = { :mysql_password => "foo" }
   end
 end
