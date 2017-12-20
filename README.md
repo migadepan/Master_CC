@@ -34,7 +34,7 @@ La orquestación de las máquinas necesarias para el proyecto, se ha realizado u
 Tanto el sistema operativo como el aprovisionamiento es el utilizado en las versiones anteriores. Podemos ver una guia de instalacion en el [siguiente enlace](https://github.com/migadepan/Master_CC/tree/master/orquestacion)
 
 
-Despliegue Vagrant:52.233.141.163
+Despliegue Vagrant:52.232.4.7
 
 
 # Aprovisionamiento
