@@ -12,7 +12,7 @@ En primer lugar me he creado una cuenta en Docker, y he enlazado mi repositorio 
 
 # Crear documento dockerfile
 
-A continuación pasamos a crar el documento dockerfile. He utilizado una distribución Debian aunque podría ser CentOS o cualquier otra.
+A continuación pasamos a crar el documento dockerfile. He utilizado una distribución Debian aunque podría ser CentOS o cualquier otra. Se puede ver en el [siguiente enlace](https://github.com/migadepan/Master_CC/blob/master/Dockerfile)
 
 # Despliegue de la máquina virtual
 
