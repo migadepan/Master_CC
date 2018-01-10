@@ -1,59 +1,52 @@
-# Provisionamiento en Azure
+# Despliegue de un contenedor de Docker Hub
 
-## Instalaciones previas
+## Creación de cuenta y vinculación con GitHub
 
-```
-#Instalación de jq para el despliegue
-sudo apt-get install jq
+En primer lugar me he creado una cuenta en Docker, y he enlazado mi repositorio de github.
 
-#Instalación de python
-sudo apt-get install python
+![Crear cuenta](https://user-images.githubusercontent.com/6852023/34749178-4d3611fa-f5a0-11e7-8dca-a4bfa6ab65a8.png)
 
-#Instalación de azure client
-echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | \sudo tee /etc/apt/sources.list.d/azure-cli.list
 
-sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893
-sudo apt-get install apt-transport-https
-sudo apt-get update && sudo apt-get install azure-cli
-```
-## Uso de AZURE CLI
-Hacemos login en azure utilizando az login. 
-Nos mostrará la siguiente información To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code CKLTUYR9Y to authenticate.
-Seguimos el enlace e introducimos el codigo para acceder.
+![Enlazar github](https://user-images.githubusercontent.com/6852023/34749200-60d2b0b0-f5a0-11e7-9435-84099d491552.png)
 
-## Creación de Script
-El siguiente Script automatiza la cración y el aprovisionamiento de la máquina virtual. 
 
-```
-#!/bin/bash
+# Crear documento dockerfile
 
-# Crear el grupo de recursos
-az group create --name GroupMiga --location eastus
+A continuación pasamos a crar el documento dockerfile. He utilizado una distribución Debian aunque podría ser CentOS o cualquier otra.
 
-# Crear la maquina virtual con el grupo de recursos anterior.
-ipAddress=$(az vm create -g GroupMiga -n MVMiga --image UbuntuLTS --generate-ssh-keys | jq -r '.publicIpAddress')
+# Despliegue de la máquina virtual
 
-echo Se ha creado la siguiente maquina:
-echo -name : MVMiga
-echo -ip : $ipAddress
-echo -------------------------
+Utilizo el siguiente comando para la creación del deployment user set
 
-# Abrir puertos
-az network nsg create --resource-group GroupMiga --location eastus --name remoteAzureMigaNSG
-az network nsg rule create --resource-group GroupMiga --nsg-name RAZMigaNSG --name remoteAzureMigaNSGRule80 --protocol tcp --priority 1000 --destination-port-range 80
-az network nsg rule create --resource-group GroupMiga --nsg-name RAZMigaNSG --name remoteAzureMigaNSGRule20 --protocol tcp --priority 999 --destination-port-range 20
-az network nsg rule create --resource-group GroupMiga --nsg-name RAZMigaNSG --name remoteAzureMigaNSGRule22 --protocol tcp --priority 998 --destination-port-range 22
+![deployment-user-set](https://user-images.githubusercontent.com/6852023/34749417-9cf199de-f5a1-11e7-9e5f-e0db06a3de90.png)
 
-#provision
-echo A continuación utilizamos la provisión con chef-solo:
-echo https://github.com/migadepan/Master_CC/tree/master/provision/chef-solo
-```
-Una vez realizado el script se ejecuta
+Creo un grupo 
+
+![create-group](https://user-images.githubusercontent.com/6852023/34749442-c0e8222c-f5a1-11e7-8b7f-2c5facd73141.png)
+
+Y creo el plan de servicios
+
+
+![plan](https://user-images.githubusercontent.com/6852023/34749457-daac8004-f5a1-11e7-9663-a4a8dab398c6.png)
+
+
+Crear el servicio web con la imagen en Docker Hub:
 
 ```
-sh acopio.sh
+curl -L https://www.opscode.com/chef/install.sh | bash
 ```
 
-Ip de la máquina creada: 52.170.4.62
+az webapp create --resource-group DockerMasterCC --plan MigaMasterCC --name serviciocc --deployment-container-image-name docker pull migadepan/master_cc
+
+
+Y finalmente el resultado del comando
+
+![captura de pantalla de 2018-01-10 02-14-27](https://user-images.githubusercontent.com/6852023/34751337-43149140-f5ac-11e7-8d77-b39b1ec70655.png)
+
+
+![captura de pantalla de 2018-01-10 02-15-40](https://user-images.githubusercontent.com/6852023/34751346-57bd84d0-f5ac-11e7-8ffc-513d3e44b8a9.png)
+
+
+
 
 
