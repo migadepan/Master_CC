@@ -16,3 +16,6 @@ Se especifican los servicios que se van a lanzar y sus dependencias, se lanzará
 ```
 sudo docker-compose up
 ```
+
+
+![captura de pantalla de 2018-01-18 19-27-58](https://user-images.githubusercontent.com/6852023/35116347-6807a4f2-fc8b-11e7-8627-573eae4cdd88.png)
