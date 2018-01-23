@@ -58,5 +58,5 @@ Dockerhub:https://hub.docker.com/r/migadepan/master_cc/
 
 ## Licencia
 
-Este proyecto será liberado bajo la licencia [GNU GLP V3]
+Este proyecto será liberado bajo la licencia [GNU GPL V3]
 
