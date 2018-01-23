@@ -49,7 +49,7 @@ Despliegue:52.224.181.107
 
 ## Contenedores
 
-Hemos trabajado con Docker, que es un proyecto de código abierto que automatiza el despliegue de aplicaciones en contenedores, proporcionando una capa de abstracción y automatizando la Virtualización.
+Hemos trabajado con Docker, que es un proyecto de código abierto que automatiza el despliegue de aplicaciones en contenedores, proporcionando una capa de abstracción y automatizando la Virtualización. Ver mas -> [Readme](https://github.com/migadepan/Master_CC/tree/master/contenedores)
 
 Contenedor:https://serviciocc.azurewebsites.net/
 
