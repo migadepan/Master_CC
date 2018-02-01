@@ -55,6 +55,11 @@ Contenedor:https://serviciocc.azurewebsites.net/
 
 Dockerhub:https://hub.docker.com/r/migadepan/master_cc/
 
+## Composición de servicios
+
+Se ha desarrollado una composición de servicios consistente en una base de datos Mysql y una API Rest desarrollada con el microframework [Flask](http://flask.pocoo.org/) para almacenar y mostrar vías de escalada. En el siguiente Readme se comentan más a fondo todos los detalles. Ver mas -> [Readme](https://github.com/migadepan/Master_CC/tree/master/compose)
+
+Hito6:http://migadns.westeurope.cloudapp.azure.com:5000
 
 ## Licencia
 
