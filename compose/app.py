@@ -86,7 +86,7 @@ def app_status():
 def app_info():
 	return json.dumps({'server_info':application.config['SQLALCHEMY_DATABASE_URI']})
 
-# run app service 
+# ejecutar el servicio 
 if __name__ == "__main__":
 	app.run(host="0.0.0.0", port=5000, debug=True)
 
