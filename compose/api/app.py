@@ -18,8 +18,8 @@ def index():
 @app.route('/via')
 def show_via():
 	try:
-		via = Via.query.filter_by(name=request.args['name']).first_or_404()
-		return json.dumps({via.name:{ 'grade': via.grade, 'place': via.place,'style':via.style}})
+		via = Via.query.filter_by(id=request.args['id']).first_or_404()
+		return json.dumps({via.id:{ 'name':via.name, 'grade': via.grade, 'place': via.place,'style':via.style}})
 	except IntegrityError:
 		return json.dumps({})
 
@@ -71,7 +71,7 @@ def vias():
 @app.route('/createdb')
 def createDatabase():
 	try:
-		HOSTNAME = 'myapirest'
+		HOSTNAME = 'db'
 		database = CreateDB(hostname = HOSTNAME)
 		db.create_all()
 		return json.dumps({'status':True})

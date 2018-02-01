@@ -8,7 +8,7 @@ app = Flask(__name__)
 DATABASE = 'mydatabase'
 PASSWORD = 'mypassword'
 USER = 'root'
-HOSTNAME = 'myapirest'
+HOSTNAME = 'db'
 
 # Conexion a la base de datos
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://%s:%s@%s/%s'%(USER, PASSWORD, HOSTNAME, DATABASE)
